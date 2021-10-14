@@ -23,7 +23,6 @@ public class Asteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print(random1);
         addY = Mathf.PingPong(Time.time * 1, random1);
         addX = Mathf.PingPong(Time.time * 1, random2);
         transform.position = new Vector3(transform.position.x, startY + addY, transform.position.z);
