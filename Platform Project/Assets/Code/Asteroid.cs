@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Move : MonoBehaviour
+public class Asteroid : MonoBehaviour
 {
-  
     float startY;
     float startX;
     float addY;
@@ -52,4 +50,3 @@ public class Move : MonoBehaviour
     }
 }
 */
-
