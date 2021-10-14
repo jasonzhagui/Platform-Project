@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -14,16 +15,22 @@ public class Player : MonoBehaviour
     public bool grounded = false;
     public Text timeLeft;
     public bool death = false;
-    
+
+    public bool complete = false;
+    public int goal = 0;
+    GameObject Rocket;
+
 
     Rigidbody2D rb;
+   
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Rocket = GameObject.FindWithTag("Rocket");
+
     }
 
-   
     void FixedUpdate()
     {
 
@@ -37,18 +44,15 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
         grounded = Physics2D.OverlapCircle(feet.position, .3f, GroundLayer);
         if (Input.GetButtonDown("Jump") && grounded){
             rb.AddForce(new Vector2(0,jumpForce));
         }
 
-        
         if (oxygen>-30){
             oxygen-=Time.deltaTime;
-            timeLeft.text=oxygen.ToString();
+            timeLeft.text=((int)oxygen).ToString();
         }
-        
         
         if (oxygen<0){
             speed=2;
@@ -58,18 +62,44 @@ public class Player : MonoBehaviour
             death = true;
         }
 
-
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.CompareTag("GasTank")){
             oxygen+=30;
             Destroy(other.gameObject);
+
+            if (goal!=2)
+            {
+                goal += 1;
+            }
+            else if (goal==2)
+            {
+                Rocket.GetComponent<BoxCollider2D>().isTrigger = true;
+            }
+
+            
         }
-        if (other.CompareTag("Battery")){
+        else if (other.CompareTag("Battery")){
             charged=true;
             Destroy(other.gameObject);
+            goal += 1;
+
+            if (goal != 2)
+            {
+                goal += 1;
+            }
+            else if (goal == 2)
+            {
+                Rocket.GetComponent<BoxCollider2D>().isTrigger = true;
+            }
+        }
+
+        else if (other.CompareTag("Rocket"))
+        {
+            SceneManager.LoadScene("Intermission");
         }
          
     }
