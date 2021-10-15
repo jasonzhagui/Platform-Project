@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     public int speed = 4;
     public int jumpForce = 700;
-    public float oxygen = 60f;
+    public float oxygen = 30f;
     public bool charged = false;
     public LayerMask GroundLayer;
     public Transform feet;
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
     {
 
         if (other.CompareTag("GasTank")){
-            oxygen+=30;
+            oxygen+=10;
             Destroy(other.gameObject);
 
             if (goal!=2)
