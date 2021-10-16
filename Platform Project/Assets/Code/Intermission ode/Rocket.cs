@@ -38,6 +38,18 @@ public class Rocket : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        if (other.CompareTag("Next"))
+        {
+            SceneManager.LoadScene("Level2");
+        }
+        if (other.CompareTag("Home"))
+        {
+            SceneManager.LoadScene("Level1");
+        }
+        if (other.CompareTag("Back"))
+        {
+            SceneManager.LoadScene("Level1");
+        }
     }
 
 }

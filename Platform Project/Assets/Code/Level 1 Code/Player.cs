@@ -99,7 +99,7 @@ public class Player : MonoBehaviour
 
         else if (other.CompareTag("Rocket"))
         {
-            SceneManager.LoadScene("Intermission");
+            SceneManager.LoadScene("Level6");
         }
          
     }

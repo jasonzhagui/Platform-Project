@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Rocket
   - Asteroid
+  - Battery
+  - GasTank
+  - Home
+  - Next
+  - Back
   layers:
   - Default
   - TransparentFX
