@@ -71,13 +71,14 @@ public class Player : MonoBehaviour
             oxygen+=10;
             Destroy(other.gameObject);
 
-            if (goal!=2)
+            if (goal!=3)
             {
                 goal += 1;
             }
-            else if (goal==2)
+            else if (goal==3)
             {
                 Rocket.GetComponent<BoxCollider2D>().isTrigger = true;
+                
             }
 
             
@@ -87,11 +88,11 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject);
             goal += 1;
 
-            if (goal != 2)
+            if (goal != 3)
             {
                 goal += 1;
             }
-            else if (goal == 2)
+            else if (goal == 3)
             {
                 Rocket.GetComponent<BoxCollider2D>().isTrigger = true;
             }
