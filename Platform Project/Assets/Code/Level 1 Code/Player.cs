@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public int speed = 4;
-    public int jumpForce = 700;
+    public int jumpForce = 1000;
     public float oxygen = 30f;
     public bool charged = false;
     public LayerMask GroundLayer;
