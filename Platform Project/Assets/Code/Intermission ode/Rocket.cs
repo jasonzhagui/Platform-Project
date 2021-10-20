@@ -7,6 +7,7 @@ public class Rocket : MonoBehaviour
 {
 
     public int speed = 4;
+    public int level = PublicVars.level;
     float xSpeed = 0;
     float ySpeed = 0;
 
@@ -40,7 +41,8 @@ public class Rocket : MonoBehaviour
         }
         if (other.CompareTag("Next"))
         {
-            SceneManager.LoadScene("Level2");
+            PublicVars.level++;
+            SceneManager.LoadScene("Level"+ PublicVars.level.ToString());
         }
         if (other.CompareTag("Home"))
         {
@@ -48,7 +50,8 @@ public class Rocket : MonoBehaviour
         }
         if (other.CompareTag("Back"))
         {
-            SceneManager.LoadScene("Level1");
+            PublicVars.level--;
+            SceneManager.LoadScene("Level" + PublicVars.level.ToString());
         }
     }
 
