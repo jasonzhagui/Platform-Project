@@ -2099,6 +2099,8 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
+  CollectEquipment: {fileID: 8300000, guid: 2731724762a5a7a4397ec148f766aa6c, type: 3}
+  CollectMetal: {fileID: 8300000, guid: d7149ddca5f5af5489c80e9f8c098c24, type: 3}
   feet: {fileID: 2138198376}
   grounded: 0
   timeLeft: {fileID: 1981738749}

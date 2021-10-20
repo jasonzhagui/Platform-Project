@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
     public float oxygen = 30f;
     public bool charged = false;
     public LayerMask GroundLayer;
+    public AudioClip CollectEquipment;
+    public AudioClip CollectMetal;
+    AudioSource audioSource;
     public Transform feet;
     public bool grounded = false;
     public Text timeLeft;
@@ -69,6 +72,8 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("GasTank")){
             oxygen+=10;
+            audioSource.clip = CollectEquipment;
+            audioSource.Play();
             Destroy(other.gameObject);
 
             if (goal!=3)
@@ -85,6 +90,8 @@ public class Player : MonoBehaviour
         }
         else if (other.CompareTag("Battery")){
             charged=true;
+            audioSource.clip = CollectEquipment;
+            audioSource.Play();
             Destroy(other.gameObject);
             goal += 1;
 
