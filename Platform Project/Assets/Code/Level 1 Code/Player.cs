@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
 
         if (oxygen>-30){
             oxygen-=Time.deltaTime;
-            timeLeft.text=((int)oxygen).ToString();
+            timeLeft.text = ((int)oxygen).ToString();
         }
         
         if (oxygen<0){
