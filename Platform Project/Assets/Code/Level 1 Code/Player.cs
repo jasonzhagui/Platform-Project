@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
             speed=2;
         }
 
-        if (oxygen<-30){
+        if (oxygen<-10){
             death = true;
         }
 
