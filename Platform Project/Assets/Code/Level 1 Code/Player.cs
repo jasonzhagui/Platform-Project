@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public Transform feet;
     public bool grounded = false;
     public Text timeLeft;
+    public Text hint;
     public bool death = false;
     public bool carry=false;
     public int rocketMetal=0;
@@ -108,6 +109,7 @@ public class Player : MonoBehaviour
         {
             if (carry==true){
                 carry=false;
+                hint.text = "Hint: Please collect all precious metals to pass this level!";
                 spriteRenderer.sprite = Oldsprite;
                 rocketMetal++;
                 Need=true;
