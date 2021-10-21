@@ -18,9 +18,12 @@ public class Player : MonoBehaviour
     public bool grounded = false;
     public Text timeLeft;
     public bool death = false;
-
-    public bool complete = false;
-    public int goal = 0;
+    public bool carry=false;
+    public int rocketMetal=0;
+    public bool Need=false;
+    public Sprite CarryMode;
+    public Sprite Oldsprite;
+    public SpriteRenderer spriteRenderer;
     GameObject Rocket;
 
 
@@ -43,10 +46,15 @@ public class Player : MonoBehaviour
         float xSpeed = Input.GetAxis("Horizontal")* speed;
         rb.velocity = new Vector2(xSpeed, rb.velocity.y);
 
+        if ((xSpeed <0 && transform.localScale.x > 0) || (xSpeed > 0 && transform.localScale.x < 0)){
+            transform.localScale *= new Vector2(-1,1);
+        }
+
     }
 
     void Update()
     {
+        
         grounded = Physics2D.OverlapCircle(feet.position, .3f, GroundLayer);
         if (Input.GetButtonDown("Jump") && grounded){
             rb.AddForce(new Vector2(0,jumpForce));
@@ -61,53 +69,57 @@ public class Player : MonoBehaviour
             speed=2;
         }
 
-        if (oxygen<-30){
+        if (oxygen<-10){
             death = true;
         }
+
+        if (carry==true){
+            spriteRenderer.sprite = CarryMode;
+        }
+
 
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("Metal") && carry==false){
+            carry=true;
+            Destroy(other.gameObject);
 
+        }
         if (other.CompareTag("GasTank")){
             oxygen+=10;
             Destroy(other.gameObject);
-            audioSource.clip = CollectEquipment;
-            audioSource.Play();
+            //audioSource.clip = CollectEquipment;
+            //audioSource.Play();
 
-            if (goal!=3)
-            {
-                goal += 1;
-            }
-            else if (goal==3)
-            {
-                Rocket.GetComponent<BoxCollider2D>().isTrigger = true;
-                
-            }
 
             
         }
         else if (other.CompareTag("Battery")){
             charged=true;
             Destroy(other.gameObject);
-            audioSource.clip = CollectEquipment;
-            audioSource.Play();
-            goal += 1;
-
-            if (goal != 3)
-            {
-                goal += 1;
-            }
-            else if (goal == 3)
-            {
-                Rocket.GetComponent<BoxCollider2D>().isTrigger = true;
-            }
+            //audioSource.clip = CollectEquipment;
+            //audioSource.Play();
+           
         }
 
         else if (other.CompareTag("Rocket"))
         {
-            SceneManager.LoadScene("Level6");
+            if (carry==true){
+                carry=false;
+                spriteRenderer.sprite = Oldsprite;
+                rocketMetal++;
+                Need=true;
+            }
+            if (Need==false){
+                SceneManager.LoadScene("Level6");
+            }
+            else {
+                if (rocketMetal==2){
+                    SceneManager.LoadScene("Level6");
+                }
+            }
         }
          
     }
