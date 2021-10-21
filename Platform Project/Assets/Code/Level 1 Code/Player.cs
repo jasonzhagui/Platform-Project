@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
 
     public bool complete = false;
     public int goal = 0;
+    public bool carry=false;
+    public int rocketMetal=0;
     GameObject Rocket;
 
 
@@ -69,7 +71,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Metal") && carry==false){
+            carry=true;
+            Destroy(other.gameObject);
+
+        }
         if (other.CompareTag("GasTank")){
             oxygen+=10;
             Destroy(other.gameObject);
@@ -107,7 +113,13 @@ public class Player : MonoBehaviour
 
         else if (other.CompareTag("Rocket"))
         {
+            if (carry==true){
+                carry=false;
+                rocketMetal++;
+            }
+            if (rocketMetal==2){
             SceneManager.LoadScene("Level6");
+            }
         }
          
     }

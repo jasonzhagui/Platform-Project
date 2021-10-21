@@ -11,6 +11,9 @@ TagManager:
   - Home
   - Next
   - Back
+  - Metal
+  - Enemy
+  - Volcano
   layers:
   - Default
   - TransparentFX
