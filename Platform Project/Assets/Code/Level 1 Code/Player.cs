@@ -69,12 +69,12 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
+        
         if (other.CompareTag("GasTank")){
             oxygen+=10;
             Destroy(other.gameObject);
-            audioSource.clip = CollectEquipment;
-            audioSource.Play();
+            //audioSource.clip = CollectEquipment;
+            //audioSource.Play();
 
             if (goal!=3)
             {
@@ -91,8 +91,8 @@ public class Player : MonoBehaviour
         else if (other.CompareTag("Battery")){
             charged=true;
             Destroy(other.gameObject);
-            audioSource.clip = CollectEquipment;
-            audioSource.Play();
+            //audioSource.clip = CollectEquipment;
+            //audioSource.Play();
             goal += 1;
 
             if (goal != 3)
