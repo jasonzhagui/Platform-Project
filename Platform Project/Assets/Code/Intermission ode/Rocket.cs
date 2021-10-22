@@ -21,7 +21,11 @@ public class Rocket : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(PublicVars.level == 7)
+        {
+            PublicVars.level = 1;
+            SceneManager.LoadScene("Level1");
+        }   
     }
 
     void FixedUpdate()

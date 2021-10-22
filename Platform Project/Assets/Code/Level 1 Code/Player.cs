@@ -11,8 +11,9 @@ public class Player : MonoBehaviour
     public float oxygen = 30f;
     public bool charged = false;
     public LayerMask GroundLayer;
-    public AudioClip CollectEquipment;
-    public AudioClip CollectMetal;
+    //AudioSource _audioSource;
+    //public AudioClip CollectEquipment;
+    //public AudioClip CollectMetal;
     AudioSource audioSource;
     public Transform feet;
     public bool grounded = false;
@@ -26,7 +27,10 @@ public class Player : MonoBehaviour
     public Sprite Oldsprite;
     public SpriteRenderer spriteRenderer;
     GameObject Rocket;
+    bool isAlive = true;
 
+
+    
 
     Rigidbody2D rb;
    
@@ -35,11 +39,16 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         Rocket = GameObject.FindWithTag("Rocket");
+        //_audioSource = GetComponent<AudioSource>();
 
     }
 
     void FixedUpdate()
     {
+        if (!isAlive)
+        {
+            return;
+        }
 
         if (charged==true){
             speed=7;
@@ -49,6 +58,12 @@ public class Player : MonoBehaviour
 
         if ((xSpeed <0 && transform.localScale.x > 0) || (xSpeed > 0 && transform.localScale.x < 0)){
             transform.localScale *= new Vector2(-1,1);
+        }
+
+        if (transform.position.y < -50)
+        {
+            isAlive = false;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
     }
@@ -61,6 +76,7 @@ public class Player : MonoBehaviour
             rb.AddForce(new Vector2(0,jumpForce));
         }
 
+       
         if (oxygen>-30){
             oxygen-=Time.deltaTime;
             timeLeft.text = ((int)oxygen).ToString();
@@ -90,18 +106,20 @@ public class Player : MonoBehaviour
         }
         if (other.CompareTag("GasTank")){
             oxygen+=10;
-            Destroy(other.gameObject);
             //audioSource.clip = CollectEquipment;
             //audioSource.Play();
+            Destroy(other.gameObject);
+            
 
 
             
         }
         else if (other.CompareTag("Battery")){
             charged=true;
-            Destroy(other.gameObject);
             //audioSource.clip = CollectEquipment;
             //audioSource.Play();
+            Destroy(other.gameObject);
+            
            
         }
 
