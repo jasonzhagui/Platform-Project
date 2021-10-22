@@ -1409,8 +1409,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008590480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -36.3, y: -8.3, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalPosition: {x: -36.9, y: -9.4, z: 0}
+  m_LocalScale: {x: 3.4876, y: 3.4876, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 16
@@ -1428,7 +1428,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.34}
+  m_Offset: {x: -0.2, y: -0.34}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1439,7 +1439,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 1.6}
+  m_Size: {x: 1.6, y: 1.6}
   m_EdgeRadius: 0
 --- !u!1 &1052389129
 GameObject:
@@ -2424,6 +2424,7 @@ GameObject:
   - component: {fileID: 1387664816}
   - component: {fileID: 1387664815}
   - component: {fileID: 1387664814}
+  - component: {fileID: 1387664819}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2471,8 +2472,6 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
-  CollectEquipment: {fileID: 8300000, guid: 2731724762a5a7a4397ec148f766aa6c, type: 3}
-  CollectMetal: {fileID: 8300000, guid: d7149ddca5f5af5489c80e9f8c098c24, type: 3}
   feet: {fileID: 19377691}
   grounded: 0
   timeLeft: {fileID: 1858344556}
@@ -2480,6 +2479,7 @@ MonoBehaviour:
   death: 0
   carry: 0
   rocketMetal: 0
+  rocketMetalNeeded: 2
   Need: 0
   CarryMode: {fileID: 21300000, guid: b2ef5cc5d1b884b40b9105597704d07c, type: 3}
   Oldsprite: {fileID: 21300000, guid: 70f53ae37d561ff42ae16e4391d04eae, type: 3}
@@ -2576,6 +2576,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1387664819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387664813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 068bd9d207ddb1147b7ed0354bf1babe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  jumpForce: 1000
+  oxygen: 30
+  charged: 0
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  feet: {fileID: 0}
+  grounded: 0
+  timeLeft: {fileID: 0}
+  hint: {fileID: 0}
+  death: 0
+  carry: 0
+  rocketMetal: 0
+  rocketMetalNeeded: 0
+  Need: 0
+  CarryMode: {fileID: 0}
+  Oldsprite: {fileID: 0}
+  spriteRenderer: {fileID: 0}
 --- !u!1 &1480733732
 GameObject:
   m_ObjectHideFlags: 0
@@ -3431,8 +3462,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897483929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -37.7416, y: 2.16, z: 0}
-  m_LocalScale: {x: 0.5935625, y: 0.5963172, z: 1}
+  m_LocalPosition: {x: -37.7416, y: 2.061, z: 0}
+  m_LocalScale: {x: 0.5935625, y: 0.5576162, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 17

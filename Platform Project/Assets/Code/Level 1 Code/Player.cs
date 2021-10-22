@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public bool death = false;
     public bool carry = false;
     public int rocketMetal = 0;
+    public int rocketMetalNeeded = 0;
     public bool Need = false;
     public Sprite CarryMode;
     public Sprite Oldsprite;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         Rocket = GameObject.FindWithTag("Rocket");
+
         //_audioSource = GetComponent<AudioSource>();
 
     }
@@ -159,7 +161,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                if (rocketMetal == 2)
+                if (rocketMetal == rocketMetalNeeded)
                 {
                     SceneManager.LoadScene("Level6");
                 }
