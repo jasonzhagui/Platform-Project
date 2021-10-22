@@ -20,9 +20,9 @@ public class Player : MonoBehaviour
     public Text timeLeft;
     public Text hint;
     public bool death = false;
-    public bool carry=false;
-    public int rocketMetal=0;
-    public bool Need=false;
+    public bool carry = false;
+    public int rocketMetal = 0;
+    public bool Need = false;
     public Sprite CarryMode;
     public Sprite Oldsprite;
     public SpriteRenderer spriteRenderer;
@@ -30,10 +30,10 @@ public class Player : MonoBehaviour
     bool isAlive = true;
 
 
-    
+
 
     Rigidbody2D rb;
-   
+
 
     void Start()
     {
@@ -50,14 +50,16 @@ public class Player : MonoBehaviour
             return;
         }
 
-        if (charged==true){
-            speed=7;
+        if (charged == true)
+        {
+            speed = 7;
         }
-        float xSpeed = Input.GetAxis("Horizontal")* speed;
+        float xSpeed = Input.GetAxis("Horizontal") * speed;
         rb.velocity = new Vector2(xSpeed, rb.velocity.y);
 
-        if ((xSpeed <0 && transform.localScale.x > 0) || (xSpeed > 0 && transform.localScale.x < 0)){
-            transform.localScale *= new Vector2(-1,1);
+        if ((xSpeed < 0 && transform.localScale.x > 0) || (xSpeed > 0 && transform.localScale.x < 0))
+        {
+            transform.localScale *= new Vector2(-1, 1);
         }
 
         if (transform.position.y < -50)
@@ -70,27 +72,35 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        
+
         grounded = Physics2D.OverlapCircle(feet.position, .3f, GroundLayer);
-        if (Input.GetButtonDown("Jump") && grounded){
-            rb.AddForce(new Vector2(0,jumpForce));
+        if (Input.GetButtonDown("Jump") && grounded)
+        {
+            rb.AddForce(new Vector2(0, jumpForce));
         }
 
-       
-        if (oxygen>-30){
-            oxygen-=Time.deltaTime;
+        if (oxygen < -30)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (oxygen > -30)
+        {
+            oxygen -= Time.deltaTime;
             timeLeft.text = ((int)oxygen).ToString();
         }
-        
-        if (oxygen<0){
-            speed=2;
+
+        if (oxygen < 0)
+        {
+            speed = 2;
         }
 
-        if (oxygen<-10){
+        if (oxygen < -10)
+        {
             death = true;
         }
 
-        if (carry==true){
+        if (carry == true)
+        {
             spriteRenderer.sprite = CarryMode;
         }
 
@@ -99,50 +109,64 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Metal") && carry==false){
-            carry=true;
+        if (other.CompareTag("Metal") && carry == false)
+        {
+            carry = true;
             Destroy(other.gameObject);
 
         }
-        if (other.CompareTag("GasTank")){
-            oxygen+=10;
+        if (other.CompareTag("GasTank"))
+        {
+            oxygen += 10;
             //audioSource.clip = CollectEquipment;
             //audioSource.Play();
             Destroy(other.gameObject);
-            
 
 
-            
         }
-        else if (other.CompareTag("Battery")){
-            charged=true;
+        else if (other.CompareTag("Battery"))
+        {
+            charged = true;
             //audioSource.clip = CollectEquipment;
             //audioSource.Play();
             Destroy(other.gameObject);
-            
-           
+
+
         }
+
+        else if (other.CompareTag("Enemy"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+
+        }
+
+
 
         else if (other.CompareTag("Rocket"))
         {
-            if (carry==true){
-                carry=false;
+            if (carry == true)
+            {
+                carry = false;
                 hint.text = "Hint: Please collect all precious metals to pass this level!";
                 spriteRenderer.sprite = Oldsprite;
                 rocketMetal++;
-                Need=true;
+                Need = true;
             }
-            if (Need==false){
+            if (Need == false)
+            {
                 SceneManager.LoadScene("Level6");
             }
-            else {
-                if (rocketMetal==2){
+            else
+            {
+                if (rocketMetal == 2)
+                {
                     SceneManager.LoadScene("Level6");
                 }
             }
         }
-         
+
     }
 }
 
-    
+
